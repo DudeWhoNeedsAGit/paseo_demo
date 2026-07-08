@@ -1,0 +1,8 @@
+# Core
+python-dotenv
+requests
+pydantic
+
+# Testing
+pytest
+pytest-asyncio
