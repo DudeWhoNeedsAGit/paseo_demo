@@ -19,3 +19,4 @@
 - Always verify `.env` presence and content (excluding secrets).
 - Use `opencode` CLI tools (e.g., `opencode providers`) for auth management.
 - Configuration resides in `/root/.config/opencode/`.
+- Log major changes and issues in `log.md` with every push.
