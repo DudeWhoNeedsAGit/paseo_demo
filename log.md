@@ -11,4 +11,5 @@ All major changes and issues are logged here. Please update this file with each 
 - Scaffolded project structure for agentic development (`src`, `tests`, `docs`).
 - Added and configured `AGENTS.md`.
 - Added `customize-opencode` skill documentation to `.opencode/skills/`.
+- Added `caveman` skill to `.opencode/skills/`.
 - Updated `log.md` to track changes.
