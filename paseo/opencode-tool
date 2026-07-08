@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Paseo/Opencode Helper Tool
+
+function show_cheatsheet() {
+    echo "=========================================================="
+    echo "           OpenRouter Setup Cheatsheet (Paseo)            "
+    echo "=========================================================="
+    echo "1. Prerequisites:"
+    echo "   - Get API Key from: https://openrouter.ai/keys"
+    echo ""
+    echo "2. Required Environment Variables (.env):"
+    echo "   - OPENROUTER_API_KEY=sk-or-v1-..."
+    echo "   - OPENROUTER_API_URL=https://openrouter.ai/api/v1"
+    echo "   - MODEL_NAME=google/gemini-2.0-flash-lite-preview:free"
+    echo ""
+    echo "3. Common Fixes:"
+    echo "   - Error '401 Unauthorized': Verify OPENROUTER_API_KEY"
+    echo "   - Error '404 Not Found': Verify MODEL_NAME is correct"
+    echo "   - Ensure 'openrouter' provider is selected in config."
+    echo ""
+    echo "4. Start Server:"
+    echo "   - opencode serve --provider openrouter --model \$MODEL_NAME"
+    echo "=========================================================="
+}
+
+case "$1" in
+    cheatsheet)
+        show_cheatsheet
+        ;;
+    setup-env)
+        echo "Creating/Updating .env file..."
+        read -p "Enter OPENROUTER_API_KEY: " key
+        echo "OPENROUTER_API_KEY=$key" > .env
+        echo "OPENROUTER_API_URL=https://openrouter.ai/api/v1" >> .env
+        echo "MODEL_NAME=google/gemini-2.0-flash-lite-preview:free" >> .env
+        echo ".env file updated successfully."
+        ;;
+    serve)
+        shift
+        # Assuming opencode is installed in the container
+        opencode serve --provider openrouter --model "${MODEL_NAME:-google/gemini-2.0-flash-lite-preview:free}" "$@"
+        ;;
+    *)
+        echo "Usage: $0 {cheatsheet|setup-env|serve}"
+        exit 1
+        ;;
+esac
