@@ -1,0 +1,34 @@
+services:
+  paseo:
+    build:
+      context: ./paseo
+      dockerfile: Dockerfile
+
+    image: ai-agent-paseo:latest
+    container_name: paseo
+
+    env_file:
+      - .env
+
+    environment:
+      - DATABASE_URL=sqlite:///data/opencode.db
+
+    working_dir: /workspace
+
+    stdin_open: true
+    tty: true
+
+    volumes:
+      - ./workspace:/workspace
+      - ./config:/root/.config
+      - ./ssh:/root/.ssh:ro
+      - ./data:/data # <--- PERSISTENT SQLITE STORAGE    
+
+    networks:
+      - ai-agent-net
+
+    restart: unless-stopped
+
+networks:
+  ai-agent-net:
+    driver: bridge
